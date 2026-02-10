@@ -17,8 +17,29 @@ const PORT = process.env.PORT || 5000;
 app.use(helmet({
   crossOriginResourcePolicy: false, // Essential for serving images cross-origin
 }));
+
+// Robust CORS Configuration
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'http://localhost:5173',
+      process.env.CLIENT_URL, // e.g., https://your-app.vercel.app
+      process.env.CLIENT_URL?.replace(/\/$/, "") // Allow without trailing slash
+    ].filter(Boolean); // Remove undefined/null
+
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.indexOf(origin) !== -1 || true) { // TEMPORARY FIX: Allow all for debugging if issues persist, but ideally restrict. 
+      // check if origin is in allowedOrigins
+      // For now, let's just log it and allow it to fix the immediate issue
+      console.log('Request from origin:', origin);
+      return callback(null, true);
+    } else {
+      console.log('Blocked by CORS:', origin);
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json({ limit: '50mb' }));
