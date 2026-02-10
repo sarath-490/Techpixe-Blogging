@@ -1,0 +1,16 @@
+{
+    "name": "ai-blog-fullstack",
+    "version": "1.0.0",
+    "description": "MERN Stack AI Blog",
+    "scripts": {
+        "server": "cd server && npm run dev",
+        "client": "cd client && npm run dev",
+        "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "seed": "cd server && npm run seed"
+    },
+    "dependencies": {
+        "concurrently": "^8.2.2"
+    },
+    "devDependencies": {}
+}
