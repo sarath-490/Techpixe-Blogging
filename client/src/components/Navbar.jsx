@@ -50,18 +50,15 @@ export default function Navbar() {
                             <div className="relative">
                                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-600 blur-sm opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
                                 <span className="relative font-black text-2xl bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-600 dark:from-cyan-400 dark:via-blue-500 dark:to-purple-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300 block">
-                                    A
+                                    T
                                 </span>
                             </div>
                             <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-cyan-500 dark:bg-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
                         <div className="flex flex-col leading-tight">
                             <span className="text-xl font-black text-slate-800 dark:text-white tracking-tight font-display">
-                                AI
-                                <span className="bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent"> Insights</span>
-                            </span>
-                            <span className="text-[8px] uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors font-medium">
-                                Autonomous Intelligence
+                                Tech
+                                <span className="bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">Pixe</span>
                             </span>
                         </div>
                     </Link>

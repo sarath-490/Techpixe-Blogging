@@ -17,7 +17,8 @@ export default function Newsletter() {
                 // Let's create a route for getting count.
                 const { data } = await api.get('/subscribers/count');
                 if (data.success) {
-                    setSubscriberCount(`${data.count + 50}+`);
+                    const roundedCount = Math.floor((data.count + 50) / 10) * 10;
+                    setSubscriberCount(`${roundedCount}+`);
                 }
             } catch (err) {
                 // Fallback

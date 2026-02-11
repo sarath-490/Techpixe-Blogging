@@ -142,10 +142,10 @@ export default function CommentSection({ postId }) {
                                 <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">{comment.content}</p>
                             </div>
                             <div className="flex items-center space-x-2 mt-1 ml-2">
-                                {user && (
+                                {user && (user.role === 'admin' || (comment.user && (comment.user === user._id || comment.user === user.id))) && (
                                     <button
                                         onClick={() => handleDelete(comment._id)}
-                                        className="text-xs text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors opacity-0 group-hover:opacity-100"
+                                        className="text-xs text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
                                         title="Delete comment"
                                     >
                                         Delete

@@ -247,17 +247,7 @@ export default function Home() {
                         {/* Modern Sidebar */}
                         <aside className="lg:w-1/3 space-y-12">
 
-                            {/* Topics Cloud */}
-                            <div>
-                                <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-6">Explore Topics</h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {['Agentic AI', 'LLM Ops', 'Vector DBs', 'AI Ethics', 'Robotics', 'Future of Work', 'Autonomous Systems', 'Neural Networks', 'Prompt Engineering', 'AI Agents'].map(tag => (
-                                        <Link key={tag} to={`/?category=${tag}`} className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 text-xs font-medium hover:border-cyan-500/50 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/20 transition-all">
-                                            {tag}
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
+
 
                             {/* Newsletter */}
                             <Newsletter />
@@ -275,7 +265,7 @@ export default function Home() {
                                     <Link to="/about" className="text-xs text-cyan-400 hover:underline">Learn more →</Link>
                                     <div className="flex items-center text-xs text-slate-500">
                                         <Users className="h-3 w-3 mr-1" />
-                                        Since 2024
+                                        Since 2026
                                     </div>
                                 </div>
                             </div>

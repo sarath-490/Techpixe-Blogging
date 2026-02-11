@@ -216,41 +216,25 @@ export default function AdminDashboard() {
                         </table>
                     </div>
                 </div>
-                {/* Password Update Section (Secret Code Method) */}
+                {/* Password Update Section (Professional Change Password Form) */}
                 <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 p-6 transition-colors">
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Security</h3>
                     <div className="max-w-md space-y-6">
-                        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800">
-                            <p className="text-sm text-blue-800 dark:text-blue-300 mb-3">
-                                To reset your password, generate a secret code which will appear in the <strong>Server Terminal</strong>.
-                            </p>
-                            <button
-                                onClick={async () => {
-                                    if (!user?.email) return toast.error("User email not found");
-                                    try {
-                                        const res = await api.post('/auth/reset-request', { email: user.email });
-                                        toast.success(res.data.message);
-                                    } catch (err) {
-                                        toast.error(err.response?.data?.error || "Request failed");
-                                    }
-                                }}
-                                className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors font-medium"
-                            >
-                                Generate Secret Code
-                            </button>
-                        </div>
-
                         <form onSubmit={async (e) => {
                             e.preventDefault();
-                            const code = e.target.code.value;
+                            const currentPassword = e.target.currentPassword.value;
                             const newPassword = e.target.newPassword.value;
+                            const confirmNewPassword = e.target.confirmNewPassword.value;
 
-                            if (!code || !newPassword) return toast.error('Please fill all fields');
+                            if (!currentPassword || !newPassword || !confirmNewPassword) return toast.error('Please fill all fields');
+
+                            if (newPassword !== confirmNewPassword) return toast.error('New passwords do not match');
+
+                            if (newPassword === currentPassword) return toast.error('New password cannot be the same as your current password. Please choose a different one.');
 
                             try {
-                                const { data } = await api.post('/auth/reset-verify', {
-                                    email: user.email,
-                                    code,
+                                const { data } = await api.put('/auth/updatepassword', {
+                                    currentPassword,
                                     newPassword
                                 });
                                 if (data.success) {
@@ -262,11 +246,11 @@ export default function AdminDashboard() {
                             }
                         }} className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Secret Code (from Terminal)</label>
+                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Current Password</label>
                                 <input
-                                    type="text"
-                                    name="code"
-                                    placeholder="Enter 6-digit code"
+                                    type="password"
+                                    name="currentPassword"
+                                    placeholder="Enter current password"
                                     className="mt-1 block w-full border border-gray-300 dark:border-slate-700 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
                                 />
                             </div>
@@ -279,8 +263,17 @@ export default function AdminDashboard() {
                                     className="mt-1 block w-full border border-gray-300 dark:border-slate-700 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
                                 />
                             </div>
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Confirm New Password</label>
+                                <input
+                                    type="password"
+                                    name="confirmNewPassword"
+                                    placeholder="Confirm new password"
+                                    className="mt-1 block w-full border border-gray-300 dark:border-slate-700 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                                />
+                            </div>
                             <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                                Set New Password
+                                Change Password
                             </button>
                         </form>
                     </div>
