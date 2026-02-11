@@ -51,8 +51,8 @@ JWT_SECRET=thisisasercretkey123456
 
 - **Login URL**: `/login` (Or use the User icon in header)
 - **Default Credentials** (after seeding):
-    - Email: `admin@aiinsights.com`
-    - Password: `password123`
+    - Email: `admin@techpixe.com`
+    - Password: `Password@123`
 
 ## SEO & Performance
 
