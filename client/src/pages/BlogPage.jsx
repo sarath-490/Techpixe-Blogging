@@ -152,13 +152,14 @@ export default function BlogPage() {
     return (
         <>
             <Helmet>
-                <title>{post.title} | AI Insights</title>
+                <title>{post.title} | TechPixe</title>
                 <meta name="description" content={post.excerpt} />
-                <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : ''} />
+                <meta name="keywords" content={post.tags ? post.tags.join(', ') : `AI, TechPixe, ${post.category}, Technology, Autonomous Agents`} />
+                <link rel="canonical" href={shareUrl} />
 
                 {/* Open Graph / Facebook */}
                 <meta property="og:type" content="article" />
-                <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
+                <meta property="og:url" content={shareUrl} />
                 <meta property="og:title" content={post.title} />
                 <meta property="og:description" content={post.excerpt} />
                 <meta property="og:image" content={post.featuredImage} />
@@ -168,6 +169,7 @@ export default function BlogPage() {
 
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:creator" content="@TechPixe" />
                 <meta name="twitter:title" content={post.title} />
                 <meta name="twitter:description" content={post.excerpt} />
                 <meta name="twitter:image" content={post.featuredImage} />
@@ -183,18 +185,22 @@ export default function BlogPage() {
                         "dateModified": post.updatedAt || post.createdAt,
                         "author": [{
                             "@type": "Person",
-                            "name": post.author || "Editorial Team",
-                            "url": "https://ai-insights.tech/about"
+                            "name": post.author || "TechPixe Editorial",
+                            "url": "https://techpixe.com/about"
                         }],
                         "publisher": {
                             "@type": "Organization",
-                            "name": "AI Insights",
+                            "name": "TechPixe",
                             "logo": {
                                 "@type": "ImageObject",
-                                "url": "https://ai-insights.tech/logo.png"
+                                "url": "https://techpixe.com/logo.png"
                             }
                         },
-                        "description": post.excerpt
+                        "description": post.excerpt,
+                        "mainEntityOfPage": {
+                            "@type": "WebPage",
+                            "@id": shareUrl
+                        }
                     })}
                 </script>
             </Helmet>

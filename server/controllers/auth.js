@@ -72,6 +72,10 @@ exports.updatePassword = async (req, res) => {
       return res.status(401).json({ success: false, error: 'Incorrect current password' });
     }
 
+    if (req.body.currentPassword === req.body.newPassword) {
+        return res.status(400).json({ success: false, error: 'New password cannot be the same as your current password. Please choose a different one.' });
+    }
+
     user.password = req.body.newPassword;
     await user.save();
 

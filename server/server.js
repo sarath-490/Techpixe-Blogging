@@ -84,10 +84,15 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ai-blog', {
 .catch(err => console.error('MongoDB Connection Error:', err));
 
 // Start Server
+// Start Server
 const startNewsletterJob = require('./cron/newsletterJob');
 startNewsletterJob();
 
-app.listen(PORT, () => {
-  console.log(`Server Started Mannn!!`)
-  // console.log(`Server running on port ${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server Started Mannn!!`)
+    // console.log(`Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;

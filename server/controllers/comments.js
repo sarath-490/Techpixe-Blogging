@@ -55,8 +55,20 @@ exports.deleteComment = async (req, res) => {
         }
         
         // Check permissions: Admin or Comment Owner
-        // Assuming req.user is populated by protect middleware
-        // Add robust check here if needed, for now just log
+        const isAdmin = req.user.role === 'admin';
+        const isOwner = comment.user.toString() === req.user.id;
+
+        if (!isAdmin && !isOwner) {
+            return res.status(403).json({ success: false, error: 'Not authorized to delete this comment' });
+        }
+
+        // Time constraint for owners (10 seconds)
+        if (isOwner && !isAdmin) {
+            const timeDiff = Date.now() - new Date(comment.createdAt).getTime();
+            if (timeDiff > 10000) { // 10 seconds
+                return res.status(403).json({ success: false, error: 'You can only delete your comment within 10 seconds of posting.' });
+            }
+        }
         
         await comment.deleteOne();
         console.log(`[DELETE] Comment deleted successfully`);

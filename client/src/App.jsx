@@ -18,6 +18,7 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Unsubscribe from './pages/Unsubscribe';
+import NotFound from './pages/NotFound';
 
 // Public Layout Wrapper
 const PublicLayout = ({ children }) => (
@@ -107,8 +108,8 @@ function AppRoutes() {
 
             <Route path="/unsubscribe/:token" element={<Unsubscribe />} />
 
-            {/* Catch all redirect to Home */}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            {/* Catch all - 404 */}
+            <Route path="*" element={<NotFound />} />
         </Routes>
     );
 }
